@@ -46,7 +46,13 @@
                         $customerComment = mysqli_real_escape_string($con, $_POST["customer_comment"]);
                         $recommendation = mysqli_real_escape_string($con, $_POST["recommendation"]);
 
-                        $firstStatement = $con->prepare(" INSERT INTO fsr_tbl (date, time_in, time_out, customer_name, address, tel_no, model_no, serial_no, meter_reading, detail_report, customer_comment, recommendation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                        $firstStatement = $con->prepare("INSERT INTO fsr_tbl (date, time_in, time_out, customer_name, address, tel_no, model_no, serial_no, meter_reading, detail_report, customer_comment, tech_recommendation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+                        if ($firstStatement === false) {
+                            die("Prepare() failed: " .htmlspecialchars($con->error));
+                        }
+
+                        $firstStatement->bind_param("ssssssssssss", $date, $timeIn, $timeOut, $customerName, $address, $telNo, $modelNo, $serailNo, $meterReading, $detailRepair, $customerComment, $recommendation);
 
                         if($firstStatement->execute()) {
                             echo "<div class='alert alert-success'>FSR Added Successfully. <a href='fpdf.php?id={$infoKey}' target='_BLANK'>Click </a> here to Print Invoice </div> ";
