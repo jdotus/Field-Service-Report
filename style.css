@@ -1,0 +1,279 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    * {
+        padding: 0;
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+    }
+
+    /* Removing the up and down arrow in number input*/
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+    
+    label {
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    /* Removing the up and down arrow in number input*/
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+    
+    label {
+        font-size: 15px;
+        font-weight: 500;
+    }
+/* Removing the up and down arrow in number input*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number], input[type=time] {
+    -moz-appearance: textfield;
+}
+
+label {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+
+    /* Designing button*/
+
+    .submit {
+        padding: 10px 17px;
+        margin: 0 40px 0 0;
+        background-color: #399918;
+        color: white;
+        border-radius: 8px;
+        border: 0;
+        transition-duration: 0.3s;
+    }
+
+    .inputContainer {
+        margin: 30px 0 60px 0;
+    }
+
+    .containers  {
+        width: 80%!important;  
+        margin: 25px auto 0 auto !important;
+    }
+
+    .display-flex {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
+       
+    }
+    .display-flex-VAT {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: flex-start;
+        margin: 30px 0 0 0;
+    }
+
+    .display-flex-bottom {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    #quantity, #units, #unitprice, #totalprice {
+        display: inline-block;
+        vertical-align: middle;
+        width: 120px;
+    }
+
+    textarea[name=item_description] {
+        resize: none;
+        width: 100%;
+        padding: 12px 20px;
+        margin: 4px 0;
+        /* display: inline-block; */
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    
+    input[type=text], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 4px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    
+    input[type=number], input[type=time] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 4px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type="date"] {
+    box-sizing: border-box;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    background-color: #0080ff;
+    padding: 12px 20px;
+    /* font-family: "Roboto Mono",monospace; */
+    color: #ffffff;
+    /* font-size: 18px; */
+    /* border: none;
+    outline: none; */
+    border-radius: 4px;
+    }
+
+    ::-webkit-calendar-picker-indicator{
+        background-color: #ffffff;
+        padding: 5px;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+
+
+    .submit:hover {
+        cursor: pointer;
+        background-color: darkgreen;
+        font-size: 13.6px;
+    }
+
+    .left-side {
+        width: 350px;
+    }
+
+    .left-side label{
+        display: inline-block;
+        margin-top: 15px;
+    }
+
+    .right-side {
+        width: 350px;
+    }
+
+    .right-side label{
+        display: inline-block;
+        margin-top: 15px;
+    }
+
+    .next {
+        width: 350px;
+    }
+
+    .next label {
+        display: inline-block;
+        margin-top: 15px;
+    }
+
+    @media screen and (max-width: 1640px) { 
+        .right-side {
+            width: 550px;
+        }
+
+        .left-side {
+            width: 300px;
+        }
+
+        .next {
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 1333px) {
+        .right-side {
+            width: 100%;
+        }
+
+        .left-side {
+            width: 100%;
+        }
+        input[type="date"] {
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width:1655px) {
+        .display-flex-VAT {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            justify-content: flex-start;
+            margin: 30px 0 0 0;
+        }
+    }
+    
+    /* Modal Content/Box */
+    .modal-contents {
+        transition-duration: 0.5s;
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        /* border: 1px solid #888; */
+        border-radius: 8px;
+        width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+    .title { 
+        text-transform: uppercase;
+        font-family:"Poppins", sans-serif;
+        font-weight: 500;
+        margin-left: 80px;
+    }
+
+    .detail_report {
+        margin: 15px 0 25px 0;
+    }
+
+    .detail_report label {
+        display: inline-block;
+        margin-top: 25px;
+    }
+
+    .technician {
+        margin: 15px 0 15px 0;
+    }
+
+    .tech_label {
+        text-transform: uppercase;
+        /* font-weight: 700; */
+        font-size: 20px;
+        padding: 0 10px 0 0;
+        letter-spacing: 4px;
+        font-weight: 500;
+    }
+
+    .tech_name {
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 23px;
+        margin-top: 0px!important;
+        letter-spacing: 1px;
+    } 
