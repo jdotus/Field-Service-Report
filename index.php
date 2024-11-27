@@ -30,7 +30,7 @@
                 <div class="containers">
                 <?php   
                     if(isset(($_POST['submit']))) {
-                        $date=date("Y-m-d",strtotime($con, $_POST["date"]));
+                        $date=date("Y-m-d",strtotime($_POST["date"]));
                         $timeIn = mysqli_real_escape_string($con, $_POST["time_in"]);
                         $timeOut = mysqli_real_escape_string($con, $_POST["time_out"]);
 
@@ -46,7 +46,7 @@
                         $customerComment = mysqli_real_escape_string($con, $_POST["customer_comment"]);
                         $recommendation = mysqli_real_escape_string($con, $_POST["recommendation"]);
 
-                        $firstStatement = $con->prepare(" INSERT INTO fsr_tbl (date, time_in, time_out, customer_name, address, tel_no, model_no, serial_no, meter_reading, detail_repair, customer_comment, recommendation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                        $firstStatement = $con->prepare(" INSERT INTO fsr_tbl (date, time_in, time_out, customer_name, address, tel_no, model_no, serial_no, meter_reading, detail_report, customer_comment, recommendation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                         if($firstStatement->execute()) {
                             echo "<div class='alert alert-success'>FSR Added Successfully. <a href='fpdf.php?id={$infoKey}' target='_BLANK'>Click </a> here to Print Invoice </div> ";
@@ -58,7 +58,7 @@
                     }
                 ?>
 
-                    <form action="fpdf.php" method="post" autocomplete="off">
+                    <form action="index.php" method="post" autocomplete="off">
                         
                         <div class="technician">
                             <label class="tech_label">Technician: </label>
@@ -87,7 +87,7 @@
                                 <input type="text" id="address" name="address" require>
 
                                 <label for="tel_no">Tel. No.: </label>
-                                <input type="number" id="tel_no" name="tel_no" min="0" max="11">
+                                <input type="number" id="tel_no" name="tel_no" max="10">
                             </div>
 
                             <div class="next">
