@@ -93,7 +93,7 @@
                                 <input type="text" id="address" name="address" required>
 
                                 <label for="tel_no">Tel. No.: </label>
-                                <input type="text" inputmode="numeric" id="tel_no" name="tel_no" maxlength="11" required>
+                                <input type="text" inputmode="numeric" id="tel_no" name="tel_no" maxlength="11" default="0" required>
                             </div>
 
                             <div class="next">
