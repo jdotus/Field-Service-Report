@@ -41,21 +41,25 @@
                         $modelNo = mysqli_real_escape_string($con, $_POST["model_no"]);
                         $serailNo = mysqli_real_escape_string($con, $_POST["serial_no"]);
                         $meterReading = mysqli_real_escape_string($con, $_POST["meter_reading"]);
-                        
+
+
+                        $customer_complaints = mysqli_real_escape_string($con, $_POST['customer_complaints']);
                         $detailRepair = mysqli_real_escape_string($con, $_POST["detail_repair"]);
                         $customerComment = mysqli_real_escape_string($con, $_POST["customer_comment"]);
                         $recommendation = mysqli_real_escape_string($con, $_POST["recommendation"]);
 
-                        $firstStatement = $con->prepare("INSERT INTO fsr_tbl (date, time_in, time_out, customer_name, address, tel_no, model_no, serial_no, meter_reading, detail_report, customer_comment, tech_recommendation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                        $firstStatement = $con->prepare("INSERT INTO fsr_tbl (date, time_in, time_out, customer_name, address, tel_no, model_no, serial_no, meter_reading, detail_report, customer_comment, tech_recommendation, customer_complaints) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                         if ($firstStatement === false) {
                             die("Prepare() failed: " .htmlspecialchars($con->error));
                         }
 
-                        $firstStatement->bind_param("ssssssssssss", $date, $timeIn, $timeOut, $customerName, $address, $telNo, $modelNo, $serailNo, $meterReading, $detailRepair, $customerComment, $recommendation);
+                        $firstStatement->bind_param("sssssssssssss", $date, $timeIn, $timeOut, $customerName, $address, $telNo, $modelNo, $serailNo, $meterReading, $detailRepair, $customerComment, $recommendation, $customer_complaints);
 
                         if($firstStatement->execute()) {
-                            echo "<div class='alert alert-success'>FSR Added Successfully. <a href='fpdf.php?id={$infoKey}' target='_BLANK'>Click </a> here to Print Invoice </div> ";
+                            $id = $con->insert_id;
+
+                            echo "<div class='alert alert-success'>FSR Added Successfully. <a href='sampleeee.php?id={$id}' target='_BLANK'>Click </a> here to Print Invoice </div> ";
                         }else {
                             echo "<div class='alert alert-danger'>Error Inserting, Info :" . $firstStatement->error . " </div> ";
                         }
@@ -109,6 +113,9 @@
                         </div>
                         
                         <div class="detail_report">
+                            <label for="customer_complaints">Customer complaints: </label>
+                            <input type="text" id="customer_complaints" name="customer_complaints" required>
+
                             <label for="detail_repair">Details of Repair: </label>
                             <input type="text" id="detail_repair" name="detail_repair" required>
 
