@@ -75,48 +75,48 @@
                             <div class="left-side">
                                 
                                 <label for="sidate">Date</label><br>
-                                <input type="date" id="date" name="date" value="<?php echo date("Y-m-d");?>" require>
+                                <input type="date" id="date" name="date" value="<?php echo date("Y-m-d");?>" required>
 
                                 <label for="time_in">Time In: </label>
-                                <input type="time" id="time_in" name="time_in" require>
+                                <input type="time" id="time_in" name="time_in" required>
 
                                 <label for="time_out">Time Out: </label>
-                                <input type="time" id="time_out" name="time_out" require>
+                                <input type="time" id="time_out" name="time_out" required>
                                 
                             </div>
 
                             <div class="right-side">
                                 <label for="customer_name">Customer Name:</label>
-                                <input type="text" id="customer_name" name="customer_name" require>
+                                <input type="text" id="customer_name" name="customer_name" required>
                                 
                                 <label for="address">Address: </label>
-                                <input type="text" id="address" name="address" require>
+                                <input type="text" id="address" name="address" required>
 
                                 <label for="tel_no">Tel. No.: </label>
-                                <input type="number" id="tel_no" name="tel_no" max="10">
+                                <input type="text" inputmode="numeric" id="tel_no" name="tel_no" maxlength="11" default="0" required>
                             </div>
 
                             <div class="next">
                                 <label for="model_no">Model No.:</label>
-                                <input type="text" id="model_no" name="model_no" require>
+                                <input type="text" id="model_no" name="model_no" required>
                                 
                                 <label for="serial_no">Serial No.: </label>
-                                <input type="text" id="serial_no" name="serial_no" require>
+                                <input type="text" id="serial_no" name="serial_no" required>
 
                                 <label for="meter_reading">Meter Reading: </label>
-                                <input type="number" id="meter_reading" name="meter_reading" require>
+                                <input type="number" id="meter_reading" name="meter_reading" required>
                             </div>
                         </div>
                         
                         <div class="detail_report">
                             <label for="detail_repair">Details of Repair: </label>
-                            <input type="text" id="detail_repair" name="detail_repair" require>
+                            <input type="text" id="detail_repair" name="detail_repair" required>
 
                             <label for="customer_comment">Customer's Comments: </label>
-                            <input type="text" id="customer_comment" name="customer_comment" require>
+                            <input type="text" id="customer_comment" name="customer_comment" required>
                             
                             <label for="recommendation">Technician's Recommendations: </label>
-                            <input type="text" id="recommendation" name="recommendation" require>
+                            <input type="text" id="recommendation" name="recommendation" required>
                         </div>
 
                        
@@ -127,5 +127,20 @@
                 </div>
             </div> 
         </div>
+
+        <script>
+            const input = document.getElementById("tel_no");
+
+            input.addEventListener("input", function () {  
+                this.value = this.value.replace(/[^0-9.-]/g, '');
+            });
+
+            // Get the filtered value after input:
+            input.addEventListener("input", function () {
+            const filteredValue = this.value;
+            console.log(filteredValue); // This will log the filtered value
+            // Use the filteredValue as needed, e.g., to send it to the server
+        });
+        </script>
     </body>
 </html>
