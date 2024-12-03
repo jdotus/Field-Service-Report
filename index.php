@@ -18,6 +18,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
 </head>
     <body>
         <!-- Modal content -->
@@ -42,7 +44,6 @@
                         $serailNo = mysqli_real_escape_string($con, $_POST["serial_no"]);
                         $meterReading = mysqli_real_escape_string($con, $_POST["meter_reading"]);
 
-
                         $customer_complaints = mysqli_real_escape_string($con, $_POST['customer_complaints']);
                         $detailRepair = mysqli_real_escape_string($con, $_POST["detail_repair"]);
                         $customerComment = mysqli_real_escape_string($con, $_POST["customer_comment"]);
@@ -59,7 +60,7 @@
                         if($firstStatement->execute()) {
                             $id = $con->insert_id;
 
-                            echo "<div class='alert alert-success'>FSR Added Successfully. <a href='sampleeee.php?id={$id}' target='_BLANK'>Click </a> here to Print Invoice </div> ";
+                            echo "<div id='alerta' class='alert alert-success'>FSR Added Successfully. <a id='linkClick'>Click </a> here to Print Invoice </div> ";
                         }else {
                             echo "<div class='alert alert-danger'>Error Inserting, Info :" . $firstStatement->error . " </div> ";
                         }
@@ -68,7 +69,7 @@
                     }
                 ?>
 
-                    <form action="index.php" method="post" autocomplete="off">
+                    <form action="index.php" method="post" autocomplete="off" id="myForms">
                         
                         <div class="technician">
                             <label class="tech_label">Technician: </label>
@@ -136,6 +137,23 @@
         </div>
 
         <script>
+
+            $(document).ready(function() {
+            var phpValue = "<?php echo $id; ?>";
+
+            $('#linkClick').attr('href', 'sampleeee.php?id=' + phpValue);
+            $('#linkClick').attr('target', '_blank');
+
+            $("#linkClick").click(function(event) {
+                // event.preventDefault();
+                // No need for setTimeout here, as the link will open in a new tab
+
+                setTimeout(function() {
+                    $('#alerta').hide();
+                    window.location.href = 'index.php';
+                }, 1000);
+            });
+            });
             const input = document.getElementById("tel_no");
 
             input.addEventListener("input", function () {  
