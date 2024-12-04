@@ -36,6 +36,9 @@
                         $timeIn = mysqli_real_escape_string($con, $_POST["time_in"]);
                         $timeOut = mysqli_real_escape_string($con, $_POST["time_out"]);
 
+                        $timeIn12hrFormat = date ('h:i A', strtotime($timeIn));
+                        $timeOut12hrFormat = date ('h:i A', strtotime($timeOut));
+
                         $customerName = mysqli_real_escape_string($con, $_POST["customer_name"]);
                         $address = mysqli_real_escape_string($con, $_POST["address"]);
                         $telNo = mysqli_real_escape_string($con, $_POST["tel_no"]);
@@ -55,7 +58,7 @@
                             die("Prepare() failed: " .htmlspecialchars($con->error));
                         }
 
-                        $firstStatement->bind_param("sssssssssssss", $date, $timeIn, $timeOut, $customerName, $address, $telNo, $modelNo, $serailNo, $meterReading, $detailRepair, $customerComment, $recommendation, $customer_complaints);
+                        $firstStatement->bind_param("sssssssssssss", $date, $timeIn12hrFormat, $timeOut12hrFormat, $customerName, $address, $telNo, $modelNo, $serailNo, $meterReading, $detailRepair, $customerComment, $recommendation, $customer_complaints);
 
                         if($firstStatement->execute()) {
                             $id = $con->insert_id;
