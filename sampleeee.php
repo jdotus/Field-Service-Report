@@ -29,7 +29,7 @@ $pdf->SetFont('Arial', '', 8.5);
 
 // Set starting point at 5.6 inches (142.24 mm) from the top
 $startX = 10;
-$startY = 55; // 5.6 inches in mm
+$startY = 54.8; // 5.6 inches in mm
 $lineHeight = 6; // Adjust line height
 
 
@@ -78,7 +78,7 @@ while($row = mysqli_fetch_array($infoQuery)) {
     $pdf->Cell(50, $lineHeight, "Technician's Recommendations:");
     $pdf->Cell(0, $lineHeight, "" . $row['tech_recommendation']);
     
-    $pdf->Ln( 5.7);
+    $pdf->Ln( 5);
     $pdf->Cell(60, $lineHeight, "Certified that repairs have been completed to customer's satisfaction and approval:");
     
     $pdf->Ln($lineHeight * 1.5);
@@ -86,7 +86,7 @@ while($row = mysqli_fetch_array($infoQuery)) {
     $pdf->Cell(120, $lineHeight, "Service Technician", 0, 0, 'R');
     
     
-    $pdf->Ln($lineHeight * 2);
+    $pdf->Ln($lineHeight * 1.75);
     // $pdf->Cell(80, $lineHeight, "Time In: _______________");
     // $pdf->Cell(50, $lineHeight, "Time Out: _______________");
     
