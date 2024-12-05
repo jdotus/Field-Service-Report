@@ -130,7 +130,7 @@ while($row = mysqli_fetch_array($infoQuery)) {
     
     $pdf->Ln($lineHeight * 1.5);
     $pdf->Cell(60, $lineHeight, '' . $row['customer_name'], 0, 0, 'R');
-    $pdf->Cell(120, $lineHeight, "Service Technician", 0, 0, 'R');
+    $pdf->Cell(120, $lineHeight, " ", 0, 0, 'R');
     
     
     $pdf->Ln($lineHeight * 1.75);
