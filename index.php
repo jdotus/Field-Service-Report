@@ -118,7 +118,7 @@
                         
                         <div class="detail_report">
                             <label for="customer_complaints">Customer complaints: </label>
-                            <input type="text" id="customer_complaints" name="customer_complaints" required>
+                            <input type="text" id="customer_complaints"  maxlength="100" name="customer_complaints" required>
 
                             <label for="detail_repair">Details of Repair: </label>
                             <input type="text" id="detail_repair" name="detail_repair" required>

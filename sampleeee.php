@@ -5,14 +5,61 @@ ini_set('display_errors', 1);
 
 require('c:/xampp/htdocs/FPDF/fpdf.php');
 
-include ('dbcon.php');
+require('dbcon.php');
 
 class PDF extends FPDF
 {
     // Page header
     function Header()
     {
-        // Leave empty to remove the header
+       // Add logo (if needed)
+    //    $this->Image('logo.png', 10, 5, 30); // Replace 'logo.png' with your actual logo path
+
+       // Company title
+       $this->SetFont('Arial', 'B', 12);
+       $this->SetXY(50, 10); 
+       $this->Cell(110, 5, ' ', 0, 1, 'C');
+
+       // Address and contact details
+       $this->SetFont('Arial', '', 10);
+       $this->SetXY(50, 15);
+       $this->MultiCell(110, 5, " ", 0, 'C');
+
+    //    // Add the date at the exact position
+    //    $this->SetFont('Arial', '', 10);
+    //    $this->SetXY(152, 35); // Adjust to match the exact location for the date
+    //    $this->Cell(25, 5, 'Date: ' . date('Y-m-d'), 0, 1, 'L');
+
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "fsr";
+
+    $con = mysqli_connect($servername,$username,$password,$dbname);
+
+    // Check connection
+    if ($con->connect_error) {
+        die("Connection failed: " . $con->connect_error);
+    }
+
+
+    $info = "SELECT * FROM fsr_tbl WHERE id = '{$_GET['id']}'";
+    $infoQuery = mysqli_query($con, $info);
+
+    if (!$infoQuery) {
+        die("Error: " . mysqli_error($con));
+    }
+
+    while ($row = mysqli_fetch_array($infoQuery)) {
+        // Access the date from the row and format it as needed
+        $date = $row['date']; // Assuming the date field is named 'date' in your database
+        $formattedDate = date('Y-m-d', strtotime($date));
+
+        $this->SetFont('Arial', '', 10);
+        $this->SetXY(152, 35);
+        $this->Cell(25, 5, ' ' . $formattedDate, 0, 1, 'L');
+    }
+
     }
 
     // Page footer
@@ -27,7 +74,7 @@ $pdf = new PDF();
 $pdf->AddPage('P', 'Letter'); // Full Letter size (8.5 x 11)
 $pdf->SetFont('Arial', '', 8.5);
 
-// Set starting point at 5.6 inches (142.24 mm) from the top
+// Set starting point at 5.6 inches (142.24 mm) from the top 
 $startX = 10;
 $startY = 54.8; // 5.6 inches in mm
 $lineHeight = 6; // Adjust line height
@@ -40,49 +87,49 @@ while($row = mysqli_fetch_array($infoQuery)) {
 
     // Add form fields
     $pdf->SetXY($startX, $startY);
-    $pdf->Cell(30, 5.3, "Customer's Name:");
-    $pdf->Cell(100, $lineHeight,'                       ' . $row['customer_name'], 0, 0);
-    $pdf->Cell(20, $lineHeight, "Tel No.:");
+    $pdf->Cell(30, 5.3, " ");
+    $pdf->Cell(100, $lineHeight,'' . $row['customer_name'], 0, 0);
+    $pdf->Cell(20, $lineHeight, " ");
     $pdf->Cell(35, $lineHeight, '                  ' . $row['tel_no']);
     $pdf->Ln($lineHeight);
-    $pdf->Cell(20, $lineHeight, "Address:");
+    $pdf->Cell(20, $lineHeight, " ");
     $pdf->Cell(10, $lineHeight, '                  ' . $row['address']);
     
     $pdf->Ln($lineHeight);
     // Align Model No., Serial No., and Meter Reading on the same row
-    $pdf->Cell(20, $lineHeight, "Model No.:");
+    $pdf->Cell(20, $lineHeight, " ");
     $pdf->Cell(35, $lineHeight, '             ' . $row['model_no']);
-    $pdf->Cell(35, $lineHeight, "Serial No.:");
+    $pdf->Cell(35, $lineHeight, " ");
     $pdf->Cell(35, $lineHeight, '               ' . $row['serial_no']);
-    $pdf->Cell(35, $lineHeight, "Meter Reading:");
+    $pdf->Cell(35, $lineHeight, " ");
     $pdf->Cell(0, $lineHeight,  '              ' . $row['meter_reading']);
     
     $pdf->Ln(5.7);
     // Adjust complaints to be inline with the label
-    $pdf->Cell(35, 5.7, "Customer's complaints:");
+    $pdf->Cell(35, 5.7, " ");
     $pdf->Cell(0, 5.7, "" . $row['customer_complaints']);
     
     $pdf->Ln( 5.7);
     // Adjust details of repair to be inline with the label
-    $pdf->Cell(30, $lineHeight, "Details of Repair:");
+    $pdf->Cell(30, $lineHeight, " ");
     $pdf->Cell(0, $lineHeight, "" . $row['detail_report']);
     $pdf->Ln(5.7);
-    $pdf->Cell(0, 5.7, "______________________________________________________");
+    $pdf->Cell(0, 5.7, "");
     
     $pdf->Ln( 5.7);
     // Adjust comments to be inline with the label
-    $pdf->Cell(40, $lineHeight, "Customer's Comments:");
+    $pdf->Cell(40, $lineHeight, " ");
     $pdf->Cell(0, $lineHeight, "" . $row['customer_comment']);
     
     $pdf->Ln( 5.7);
-    $pdf->Cell(50, $lineHeight, "Technician's Recommendations:");
+    $pdf->Cell(50, $lineHeight, " ");
     $pdf->Cell(0, $lineHeight, "" . $row['tech_recommendation']);
     
     $pdf->Ln( 5);
-    $pdf->Cell(60, $lineHeight, "Certified that repairs have been completed to customer's satisfaction and approval:");
+    $pdf->Cell(60, $lineHeight, " ");
     
     $pdf->Ln($lineHeight * 1.5);
-    $pdf->Cell(60, $lineHeight, "Customer's Signature & Printed Name", 0, 0, 'L');
+    $pdf->Cell(60, $lineHeight, '' . $row['customer_name'], 0, 0, 'R');
     $pdf->Cell(120, $lineHeight, "Service Technician", 0, 0, 'R');
     
     
@@ -96,11 +143,11 @@ while($row = mysqli_fetch_array($infoQuery)) {
     // $lineHeight = 10; // Adjust line height as needed
     
     // Time In section
-    $pdf->Cell($widthLeft / 2, $lineHeight, "Time In:", 0, 0, 'R'); // Label on the left
-    $pdf->Cell($widthLeft / 2, $lineHeight, '' . $row['time_in'], 0, 0, 'C'); // Centered underline
+    $pdf->Cell($widthLeft / 2, $lineHeight, " ", 0, 0, 'R'); // Label on the left
+    $pdf->Cell($widthLeft /2.5, $lineHeight, '' . $row['time_in'], 0, 0, 'C'); // Centered underline
     
     // Time Out section
-    $pdf->Cell(10, $lineHeight, "Time Out:", 0, 0, 'L'); // Label on the left
+    $pdf->Cell(30, $lineHeight, " ", 0, 0, 'L'); // Label on the left
     $pdf->Cell(50, $lineHeight, '' . $row['time_out'], 0, 1, 'C'); // Centered underline and move to next line
     
     
