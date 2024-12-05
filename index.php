@@ -144,7 +144,7 @@
             $(document).ready(function() {
             var phpValue = "<?php echo $id; ?>";
 
-            $('#linkClick').attr('href', 'sampleeee.php?id=' + phpValue);
+            $('#linkClick').attr('href', 'print.php?id=' + phpValue);
             $('#linkClick').attr('target', '_blank');
 
             $("#linkClick").click(function(event) {
