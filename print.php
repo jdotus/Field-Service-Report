@@ -55,10 +55,6 @@ class PDF extends FPDF
         $date = $row['date']; // Assuming the date field is named 'date' in your database
         $formattedDate = date('Y-m-d', strtotime($date));
 
-        // $this->SetFont('Arial', '', 10);
-        // $this->SetXY(152, 35);
-        // $this->Cell(25, 5, 'Date: ' . $formattedDate, 0, 1, 'L');
-
         $this->SetFont('Arial', 'B', 10);
         $this->SetXY(152, 35);
         $this->Cell(15, 5, 'Date: ', 0, 0, 'L');
@@ -162,13 +158,6 @@ while($row = mysqli_fetch_array($infoQuery)) {
     $pdf->SetFont('Arial', '', 10);
     $pdf->Cell(0, 5.7, $row['customer_complaints']);
 
-    // $pdf->Ln( 5.7);
-    // // Adjust details of repair to be inline with the label
-    // $pdf->Cell(20, $lineHeight, " ");
-    // $pdf->Cell(0, $lineHeight, "Details of Repair: " . $row['detail_report']);
-    // $pdf->Ln(5.7);
-    // $pdf->Cell(0, 5.7, "");
-
     $pdf->Ln(5.7);
     // Adjust details of repair to be inline with the label
     $pdf->Cell(10, $lineHeight, " ");
@@ -204,16 +193,6 @@ while($row = mysqli_fetch_array($infoQuery)) {
         $pdf->MultiCell($contentWidth, $lineHeight, utf8_decode($row['additional_text']), 0, 'L');
     }
     
-    
-    // Add final spacing
-    // $pdf->Ln(5.7);
-    // $pdf->Cell(0, 5.7, "");
-
-    // $pdf->Ln( 5.7);
-    // // Adjust comments to be inline with the label
-    // $pdf->Cell(10, $lineHeight, " ");
-    // $pdf->Cell(0, $lineHeight, "Customer's Comments:    " . $row['customer_comment']);
-
     $pdf->Ln(5.7); // Add a line break
 
 // Adjust comments to be inline with the label
@@ -261,21 +240,11 @@ while($row = mysqli_fetch_array($infoQuery)) {
 
 
     $pdf->Ln($lineHeight * 2);
-    // $pdf->Cell(80, $lineHeight, "Time In: _______________");
-    // $pdf->Cell(50, $lineHeight, "Time Out: _______________");
     
     // Define the width of each section
     $widthLeft = 110;  // Width for "Time In"
     $widthRight = 70; // Width for "Time Out"
-    // $lineHeight = 10; // Adjust line height as needed
-    
-    // Time In section
-    // $pdf->Cell($widthLeft / 2, $lineHeight, " ", 0, 0, 'R'); // Label on the left
-    // $pdf->Cell($widthLeft /2.5, $lineHeight, 'Time In:  ' . $row['time_in'], 0, 0, 'C'); // Centered underline
-    
-    // // Time Out section
-    // $pdf->Cell(30, $lineHeight, " ", 0, 0, 'L'); // Label on the left
-    // $pdf->Cell(50, $lineHeight, 'Time Out:  ' . $row['time_out'], 0, 1, 'C'); // Centered underline and move to next line
+
     
     // Time In section
 $pdf->Cell($widthLeft / 2, $lineHeight, " ", 0, 0, 'R'); // Label on the left
