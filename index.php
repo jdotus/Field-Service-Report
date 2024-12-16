@@ -118,16 +118,16 @@
                         
                         <div class="detail_report">
                             <label for="customer_complaints">Customer complaints: </label>
-                            <input type="text" id="customer_complaints"  maxlength="100" name="customer_complaints" required>
+                            <input type="text" id="customer_complaints"  maxlength="92" name="customer_complaints" required>
 
                             <label for="detail_repair">Details of Repair: </label>
                             <input type="text" id="detail_repair" name="detail_repair" required>
 
                             <label for="customer_comment">Customer's Comments: </label>
-                            <input type="text" id="customer_comment" name="customer_comment" required>
+                            <input type="text" id="customer_comment" maxlength="92"  name="customer_comment" required>
                             
                             <label for="recommendation">Technician's Recommendations: </label>
-                            <input type="text" id="recommendation" name="recommendation" required>
+                            <input type="text" id="recommendation" maxlength="92" name="recommendation" required>
                         </div>
 
                        
