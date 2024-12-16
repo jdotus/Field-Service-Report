@@ -188,11 +188,18 @@ while($row = mysqli_fetch_array($infoQuery)) {
     $pdf->MultiCell($contentWidth, $lineHeight, utf8_decode($row['detail_report']), 0, 'L');
     
     // If there is additional content, position it correctly
+    // if (!empty($row['additional_text'])) {
+    //     $pdf->SetX($leftMargin + 20 + $labelWidth); // Align additional content with the text
+    //     $pdf->MultiCell($contentWidth, $lineHeight, utf8_decode($row['additional_text']), 0, 'L');
+    // }
+    
     if (!empty($row['additional_text'])) {
         $pdf->SetX($leftMargin + 20 + $labelWidth); // Align additional content with the text
-        $pdf->MultiCell($contentWidth, $lineHeight, utf8_decode($row['additional_text']), 0, 'L');
+        // Convert the text encoding to ISO-8859-1 (if necessary)
+        $pdf->MultiCell($contentWidth, $lineHeight, mb_convert_encoding($row['additional_text'], 'ISO-8859-1', 'UTF-8'), 0, 'L');
     }
     
+
     $pdf->Ln(5.7); // Add a line break
 
 // Adjust comments to be inline with the label
