@@ -185,7 +185,7 @@ while($row = mysqli_fetch_array($infoQuery)) {
     $x = $pdf->GetX(); // Save current X position (end of the label)
     $y = $pdf->GetY(); // Save current Y position
     $pdf->SetXY($x, $y); // Align content after the label
-    $pdf->MultiCell($contentWidth, $lineHeight, utf8_decode($row['detail_report']), 0, 'L');
+    $pdf->MultiCell($contentWidth, $lineHeight, mb_convert_encoding($row['detail_report'], 'ISO-8859-1', 'UTF-8'), 0, 'L');
     
     // If there is additional content, position it correctly
     // if (!empty($row['additional_text'])) {
