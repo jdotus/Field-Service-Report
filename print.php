@@ -25,11 +25,6 @@ class PDF extends FPDF
        $this->SetXY(60, 12);
        $this->MultiCell(110, 3.5, "10th Flr. MG Tower, #75 Shaw Blvd., \n Brgy. Daang Bakal, Mandaluyong City \n Telephone No.: 631-9454 Loc. 106/111 \n Fax No.: 535-8731", 0, 'L');
 
-    //    // Add the date at the exact position
-    //    $this->SetFont('Arial', '', 10);
-    //    $this->SetXY(152, 35); // Adjust to match the exact location for the date
-    //    $this->Cell(25, 5, 'Date: ' . date('Y-m-d'), 0, 1, 'L');
-
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -69,7 +64,7 @@ class PDF extends FPDF
         $this->Cell(155, 5, 'No.:', 0, 0, 'R');
         $this->SetFont('Arial', 'B', 12);
         $this->SetTextColor(255, 0, 0);
-        $this->Cell(0, 5, 'MEOW', 0, 1, 'L');
+        $this->Cell(0, 5, 'MEOW', 0, 1, 'L'); // INSERT HERE THE CODE FOR NO.
 
     }
 
@@ -105,7 +100,6 @@ while($row = mysqli_fetch_array($infoQuery)) {
     // Set bold for "Customer Name:"
     $pdf->SetFont('Arial', 'B', 10);
     $pdf->Cell(35, $lineHeight, 'Customer Name: ', 0, 0);
-
     // Switch back to normal for the value
     $pdf->SetFont('Arial', '', 10);
     $pdf->Cell(0, $lineHeight, $row['customer_name']);
@@ -117,7 +111,6 @@ while($row = mysqli_fetch_array($infoQuery)) {
     // Set bold for "Tel. No."
     $pdf->SetFont('Arial', 'B', 10);
     $pdf->Cell(25, $lineHeight, 'Tel. No.: ', 0, 0);
-
     // Switch back to normal for the value
     $pdf->SetFont('Arial', '', 10);
     $pdf->Cell(0, $lineHeight, $row['tel_no']);
@@ -157,7 +150,6 @@ while($row = mysqli_fetch_array($infoQuery)) {
     $pdf->Cell(40, 5.7, "Customer Complaints: ");
     $pdf->SetFont('Arial', '', 10);
     $pdf->Cell(0, 5.7, $row['customer_complaints']);
-
     $pdf->Ln(5.7);
     // Adjust details of repair to be inline with the label
     $pdf->Cell(10, $lineHeight, " ");
@@ -187,12 +179,6 @@ while($row = mysqli_fetch_array($infoQuery)) {
     $pdf->SetXY($x, $y); // Align content after the label
     $pdf->MultiCell($contentWidth, $lineHeight, mb_convert_encoding($row['detail_report'], 'ISO-8859-1', 'UTF-8'), 0, 'L');
     
-    // If there is additional content, position it correctly
-    // if (!empty($row['additional_text'])) {
-    //     $pdf->SetX($leftMargin + 20 + $labelWidth); // Align additional content with the text
-    //     $pdf->MultiCell($contentWidth, $lineHeight, utf8_decode($row['additional_text']), 0, 'L');
-    // }
-    
     if (!empty($row['additional_text'])) {
         $pdf->SetX($leftMargin + 20 + $labelWidth); // Align additional content with the text
         // Convert the text encoding to ISO-8859-1 (if necessary)
@@ -221,7 +207,6 @@ while($row = mysqli_fetch_array($infoQuery)) {
     $pdf->SetFont('Arial', '', 10);
     $pdf->Cell(0, $lineHeight, $row['tech_recommendation'], 0, 1);
 
-    
 
     $pdf->Ln($lineHeight * 2); // Add spacing before the line
 
@@ -242,9 +227,6 @@ while($row = mysqli_fetch_array($infoQuery)) {
     $pdf->Cell($pdf->GetStringWidth($techLabel), $lineHeight, $techLabel, 'T', 0, 'L'); // 'T' for top border
     
     $pdf->SetFont('Arial', '', 10); // Reset to normal font for further text
-    
-    
-
 
     $pdf->Ln($lineHeight * 2);
     
