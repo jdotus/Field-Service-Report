@@ -83,7 +83,10 @@
                             <div class="left-side">
                                 
                                 <label for="sidate">Date</label><br>
-                                <input type="date" id="date" name="date" value="<?php echo date("Y-m-d");?>" required>
+                                <input type="date" id="date" name="date" 
+                                    value="<?php echo date('Y-m-d'); ?>" 
+                                    max="<?php echo date('Y-m-d'); ?>" 
+                                    required>
 
                                 <label for="time_in">Time In: </label>
                                 <input type="time" id="time_in" name="time_in" required>
